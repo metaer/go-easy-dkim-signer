@@ -9,7 +9,7 @@ openssl genrsa -out private 2048
 openssl rsa -in private -pubout -out public
 ```
 ```shell
-sed '1d;$d' public | tr -d '\n' > spublic
+sed '1d;$d' public | tr -d '\n' > spublic; echo "" >> spublic
 ```
 Then make up a selector, i.e. `myselector` (could be any other string)<br>
 Add txt-record to DNS of your domain:
