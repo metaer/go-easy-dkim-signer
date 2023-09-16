@@ -1,0 +1,8 @@
+version: '3.9'
+
+services:
+  mailcatcher:
+    image: dockage/mailcatcher:0.8.2
+    ports:
+      - "1580:1080"
+      - "1525:1025"
