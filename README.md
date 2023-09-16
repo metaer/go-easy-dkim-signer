@@ -78,7 +78,6 @@ func main() {
 	domain := "example.com"
 	from := "example@example.com"
 	rcpt := "rcpt@example.com"
-	sendTo := "example@example.com"
 	selector := "myselector"
 	privateFileKeyPath := "private"
 
@@ -98,7 +97,7 @@ func main() {
 	if err != nil {
 		log.Fatal(err)
 	}
-	err = smtp.SendMail("localhost:1525", nil, from, []string{sendTo}, signedMessage)
+	err = smtp.SendMail("localhost:1525", nil, from, []string{rcpt}, signedMessage)
 	if err != nil {
 		log.Fatal(err)
 	}
