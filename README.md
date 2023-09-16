@@ -60,6 +60,7 @@ func main() {
 ```
 
 #### Example 2
+Install `go get github.com/metaer/go-easy-dkim-signer`<br>
 Install `go get gopkg.in/gomail.v2` for object-oriented way to create an email message
 ```go
 package main
