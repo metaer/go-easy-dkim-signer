@@ -3,7 +3,7 @@
 ## How to use
 ### Generate keys and add txt-record to your domain
 ```shell
-openssl genrsa -out private 2048
+openssl genrsa -out private 1024
 ```
 ```shell
 openssl rsa -in private -pubout -out public
