@@ -19,7 +19,12 @@ func Sign(data []byte, dkimPrivateKeyFilePath string, selector string, domain st
 		return nil, err
 	}
 
-	return signWithBytesPrivateKey(data, privateKeyBytes, selector, domain)
+	block, _ := pem.Decode(privateKeyBytes)
+	if block == nil {
+		return nil, errors.New("failed to decode PEM block containing private key")
+	}
+
+	return signWithBytesPrivateKey(data, block.Bytes, selector, domain)
 }
 
 func SignWithStringPrivateKey(data []byte, privateKeyString string, selector string, domain string) ([]byte, error) {
@@ -32,12 +37,7 @@ func SignWithStringPrivateKey(data []byte, privateKeyString string, selector str
 }
 
 func signWithBytesPrivateKey(data []byte, privateKeyBytes []byte, selector string, domain string) ([]byte, error) {
-	block, _ := pem.Decode(privateKeyBytes)
-	if block == nil {
-		return nil, errors.New("failed to decode PEM block containing private key")
-	}
-
-	result, err := x509.ParsePKCS8PrivateKey(block.Bytes)
+	result, err := x509.ParsePKCS8PrivateKey(privateKeyBytes)
 	if err != nil {
 		return nil, err
 	}
